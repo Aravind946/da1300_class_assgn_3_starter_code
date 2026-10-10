@@ -47,8 +47,6 @@ def count_fair_managers(root: Optional[TreeNode]) -> int:
         salary=[]
         findsalaries(i)
         salaries.append(sum(salary)//len(salary))
-    print(l)
-    print(salaries)
     for i in range(len(l)):
         if l[i].salary==salaries[i]:
             ans+=1
