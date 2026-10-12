@@ -28,7 +28,7 @@ def printer_queue_order(pages: List[int]) -> List[int]:
             pages.append(pages[0]-1)
             pages=pages[1:]
             l.append(l[counter])
-            l.pop(counter)
+            l=l[:counter]+l[counter+1:]
     return l
     pass
 
