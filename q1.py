@@ -22,13 +22,13 @@ def printer_queue_order(pages: List[int]) -> List[int]:
         if len(pages)==0:
             break
         elif pages[0]==1:
-            counter+=1
             pages.pop(0)
-        else:
+            counter+=1
+        elif pages[0]>1:
             pages.append(pages[0]-1)
             pages.pop(0)
-            l.append(l[0])
-            l.pop(0)
+            l.append(l[counter])
+            l.pop(counter)
     return l
     pass
 
