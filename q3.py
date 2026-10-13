@@ -7,6 +7,8 @@ class TreeNode:
         self.salary = salary
         self.left = left
         self.right = right
+        self.salaries=0
+        self.number=0
 
 
 def count_fair_managers(root: Optional[TreeNode]) -> int:
@@ -34,20 +36,33 @@ def count_fair_managers(root: Optional[TreeNode]) -> int:
         findmanagers(node.right)
     findmanagers(root)
     salaries=[]
-    salary=[]
     def findsalaries(node):
-        nonlocal salaries
-        nonlocal salary
         if node==None:
             return
-        salary.append(node.salary)
+        if node.left!=None and node.right!=None:
+            if node.left.salaries!=0 and node.right.salaries!=0:
+                node.salaries+=node.left.salaries+node.right.salaries
+                node.number+=node.left.number+node.right.number
+                return
+        elif node.left!=None:
+            if node.left.salaries!=0:
+                node.salaries+=node.left.salaries
+                node.number+=node.left.number
+                return
+        elif node.right!=None:
+            if node.right.salaries!=0:
+                node.salaries+=node.right.salaries
+                node.number+=node.right.number
+                return
+        node.number+=1
         findsalaries(node.left)
         findsalaries(node.right)
+        node.salaries+=node.salary
+    findsalaries(root)
     for i in l:
-        salary=[]
-        findsalaries(i)
-        salaries.append(sum(salary)//len(salary))
+        salaries.append(i.salaries//i.number)
     for i in range(len(l)):
+        print(salaries)
         if l[i].salary==salaries[i]:
             ans+=1
     return ans 
