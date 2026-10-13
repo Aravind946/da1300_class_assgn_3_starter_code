@@ -16,20 +16,16 @@ def printer_queue_order(pages: List[int]) -> List[int]:
     Returns:
         List of document numbers in the order they finish printing.
     """
-    l=[i for i in range(len(pages))]
-    counter=0
-    while True:
-        if len(pages)==0:
-            break
-        elif pages[0]==1:
-            pages=pages[1:]
-            counter+=1
-        elif pages[0]>1:
-            pages.append(pages[0]-1)
-            pages=pages[1:]
-            l.append(l[counter])
-            l=l[:counter]+l[counter+1:]
-    return l
+    l=[]
+    index=0
+    for i in pages:
+        l.append((i,index))
+        index+=1
+    l1=sorted(l,key=lambda x:x[0])
+    ans=[]
+    for i in l1:
+        ans.append(i[1])
+    return ans
     pass
 
 
